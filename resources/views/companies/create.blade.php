@@ -15,7 +15,12 @@
 
                 <form action="{{ route('companies.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    @include('companies.partials._form-control')
+                    <div class="card-body">
+                        @include('companies.partials._form-control')
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    </div>
                 </form>
             </div>
         </div>

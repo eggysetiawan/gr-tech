@@ -16,14 +16,15 @@ class CompanySeeder extends Seeder
     public function run()
     {
 
-        $companies = ['facebook', 'amazon', 'apple', 'netflix', 'google'];
+        $companies = ['GR Tech', 'facebook', 'amazon', 'apple', 'netflix', 'google'];
 
         foreach ($companies as $company) {
+            $website = str_replace(" ", "", strtolower($company));
             Company::create([
                 'name' => ucfirst($company),
                 'slug' => Str::slug($company),
-                'email' => 'mail@' . $company . '.com',
-                'website' => 'www.' . $company . '.com',
+                'email' => 'mail@' . $website . '.com',
+                'website' => 'www.' . $website . '.com',
             ]);
         }
     }

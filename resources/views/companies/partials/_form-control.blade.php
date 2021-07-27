@@ -1,4 +1,3 @@
-<div class="card-body">
     <div class="form-group">
         <label for="name">{{ __('Company Name') }}</label>
         <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
@@ -39,24 +38,24 @@
 
 
     <div class="form-group">
-        <label for="img">Logo</label>
+
+        @if (request()->segment(2) == 'create')
+            <label for="img">Logo</label>
+        @endif
 
         <div class="custom-file">
             <input type="file" name="img" class="custom-file-input" id="img">
             <label class="custom-file-label" for="img">Choose file</label>
         </div>
     </div>
-</div>
 
 
-<div class="card-footer">
-    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
-</div>
 
-@push('script')
-    <script>
-        $(function() {
-            bsCustomFileInput.init();
-        });
-    </script>
-@endpush
+
+    @push('script')
+        <script>
+            $(function() {
+                bsCustomFileInput.init();
+            });
+        </script>
+    @endpush
