@@ -55,6 +55,16 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('employees.index') }}"
+                        class="nav-link{{ request()->is('employees') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Employees
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

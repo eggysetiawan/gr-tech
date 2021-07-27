@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\DataTables\CompanyDataTable;
+use App\Http\Requests\CompanyRequest;
 
 class CompanyController extends Controller
 {
@@ -12,9 +14,9 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CompanyDataTable $dataTable)
     {
-        //
+        return $dataTable->render('companies.index');
     }
 
     /**
@@ -24,18 +26,25 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('companies.create', [
+            'company' => new Company(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request\CompanyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
-        //
+        $attr = $request->validated();
+        $attr['slug'] =  Str::slug($request->name);
+
+        Company::create($attr);
+        session()->flash('success', __('Company has been created.'));
+        return redirect('companies');
     }
 
     /**
@@ -46,7 +55,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        $company->load('employees');
+        return view('companies.show', compact('company'));
     }
 
     /**
@@ -57,19 +67,33 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        return view('companies.edit', compact('company'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request\CompanyRequest  $request
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
-        //
+        $company->update($request->validated());
+
+        if ($request->has('img')) {
+            if (!$company->getFirstMediaUrl('company-logo')) {
+                $company->addMediaFromRequest('img')
+                    ->toMediaCollection('company-logo');
+            } else {
+                $company->media()->delete();
+                $company->addMediaFromRequest('img')
+                    ->toMediaCollection('company-logo');
+            }
+        }
+
+        session()->flash('success', __('Company has been updated'));
+        return redirect('companies');
     }
 
     /**
@@ -80,6 +104,9 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        $company->media()->delete();
+        session()->flash('success', __('Company has been deleted.'));
+        return redirect('companies');
     }
 }

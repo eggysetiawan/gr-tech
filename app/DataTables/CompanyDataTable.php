@@ -2,14 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\Company;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UserDataTable extends DataTable
+class CompanyDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,13 +20,16 @@ class UserDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
-            ->editColumn('action', function (User $user) {
-                return view('users.partials.action', [
-                    'user' => $user
+            ->editColumn('action', function (Company $company) {
+                return view('companies.partials.action', [
+                    'company' => $company
                 ]);
             })
-            ->editColumn('role', function (User $user) {
-                return join(' - ', array_unique($user->roles->pluck('name')->toArray()));
+
+            ->editColumn('website', function (Company $company) {
+                return view('companies.partials.website', [
+                    'company' => $company,
+                ]);
             })
             ->rawColumns(['action']);
     }
@@ -36,13 +37,12 @@ class UserDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \User $model
+     * @param \Company $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Company $model)
     {
         return $model->newQuery()
-            ->with(['roles'])
             ->latest();
     }
 
@@ -54,7 +54,7 @@ class UserDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('user-table')
+            ->setTableId('company-table')
             ->minifiedAjax()
             ->parameters([
                 'stateSave' => true,
@@ -97,19 +97,11 @@ class UserDataTable extends DataTable
             Column::make('name')
                 ->title(__('Name')),
 
-            Column::make('username')
-                ->title(__('Username')),
-
             Column::make('email')
                 ->title(__('Email')),
 
-            Column::make('mobile')
-                ->title(__('Mobile')),
-
-            Column::make('role')
-                ->title('Role')
-                ->orderable(false)
-                ->searchable(false)
+            Column::make('website')
+                ->title(__('Website')),
 
         ];
     }
@@ -121,6 +113,6 @@ class UserDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'User_' . date('YmdHis');
+        return 'Company_' . date('YmdHis');
     }
 }

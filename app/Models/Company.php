@@ -14,7 +14,7 @@ class Company extends Model implements HasMedia
     use InteractsWithMedia;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'email', 'website'];
+    protected $fillable = ['name', 'slug', 'email', 'website'];
 
     public function employees()
     {
