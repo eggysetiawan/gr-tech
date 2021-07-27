@@ -14,7 +14,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements HasMedia
 {
     use HasFactory, Notifiable;
-    use HasRoles;
     use InteractsWithMedia;
 
     /**
@@ -23,10 +22,7 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'name',
-        'username',
         'email',
-        'mobile',
         'password',
     ];
 

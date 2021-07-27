@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +19,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'auth.login');
-Auth::routes();
+
+Auth::routes([
+    'register' => false,
+]);
+
+
 
 Route::middleware('auth')->group(function () {
 
@@ -25,5 +32,13 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users', UserController::class)->parameters([
         'users' => 'user:username',
+    ]);
+
+    Route::resource('companies', CompanyController::class)->parameters([
+        'companies' => 'company:slug',
+    ]);
+
+    Route::resource('employees', EmployeeController::class)->parameters([
+        'employees' => 'employee:slug',
     ]);
 });
