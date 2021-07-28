@@ -109,7 +109,8 @@ class EmployeeDataTable extends DataTable
                 ->title(__('Email')),
 
             Column::make('phone')
-                ->title(__('Phone')),
+                ->title(__('Phone'))
+                ->orderable(false),
 
             // invisible
             Column::make('first_name')
