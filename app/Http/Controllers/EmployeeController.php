@@ -53,7 +53,21 @@ class EmployeeController extends Controller
         return redirect('employees');
     }
 
-
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Company  $company
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Company $company)
+    {
+        $company->with('employees');
+        return view('companies.show', [
+            'company' => $company,
+            'employeeCount' => Company::find($company->id)->count(),
+            'menu' => 'employees',
+        ]);
+    }
 
     /**
      * Update the specified resource in storage.

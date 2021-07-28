@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Company;
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CompanyRequest extends FormRequest

@@ -59,6 +59,7 @@ class CompanyController extends Controller
         return view('companies.show', [
             'company' => $company,
             'employeeCount' => Company::find($company->id)->count(),
+            'menu' => 'companies',
         ]);
     }
 
@@ -85,7 +86,7 @@ class CompanyController extends Controller
         $company->update($request->validated());
         (new CompanyService())->updateImg($company, $request);
 
-        session()->flash('success', __('Company has been updated'));
+        session()->flash('success', __('Company has been updated.'));
         return redirect('companies');
     }
 

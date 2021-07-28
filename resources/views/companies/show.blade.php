@@ -4,7 +4,7 @@
 ])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('companies.index') }}">Companies</a></li>
+    <li class="breadcrumb-item"><a href="{{ route($menu . '.index') }}">{{ ucfirst($menu) }}</a></li>
     <li class="breadcrumb-item active">{{ $company->name }}</li>
 @endsection
 

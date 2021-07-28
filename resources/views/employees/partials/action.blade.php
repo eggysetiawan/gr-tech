@@ -1,9 +1,4 @@
 <x-dropdown>
-    <a href="{{ route('employees.show', $employee->id) }}" class="dropdown-item"
-        title="{{ __('Company detail.') }}"><i class="far fa-eye nav-icon"></i>
-        {{ __('Detail') }}
-    </a>
-
 
     <button type="button" class="dropdown-item" title="{{ __('Edit Employee.') }}" data-toggle="modal"
         data-target="#employee-{{ $employee->id }}">

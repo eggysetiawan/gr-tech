@@ -102,9 +102,6 @@ class EmployeeDataTable extends DataTable
                 ->title(__('Full Name')),
 
 
-
-
-
             Column::computed('companyname')
                 ->title(__('Company')),
 

@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('companies', CompanyController::class)->parameters([
             'companies' => 'company:slug',
         ]);
-
-        Route::resource('employees', EmployeeController::class);
+        Route::resource('employees', EmployeeController::class)->except(['show']);
+        Route::get('employees/{company:slug}', [EmployeeController::class, 'show'])->name('employees.show');
     });
 });
