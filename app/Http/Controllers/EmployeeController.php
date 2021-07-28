@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\DataTables\EmployeeDataTable;
+use App\Events\EmployeeCreated;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 
@@ -44,7 +45,10 @@ class EmployeeController extends Controller
     {
         $attr = $request->validated();
         $attr['company_id'] = $request->company;
-        Employee::create($attr);
+        $employees = Employee::create($attr);
+
+        event(new EmployeeCreated($employees));
+
         session()->flash('success', __('Employee has been created.'));
         return redirect('employees');
     }
