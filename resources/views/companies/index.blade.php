@@ -12,7 +12,7 @@
 
     <div class="d-flex justify-content-center">
         <div class="col-md-10">
-            <a href="{{ route('companies.create') }}" class="btn btn-primary mb-4">{{ __('Add Company') }}</a>
+            <a href="{{ route('companies.create') }}" class="btn bg-orange mb-4">{{ __('Add Company') }}</a>
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ $tableHeader ?? 'Companies Table' }}</h3>

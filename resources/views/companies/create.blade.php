@@ -20,7 +20,7 @@
                         @include('companies.partials._form-control')
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                        <button type="submit" class="btn bg-orange">{{ __('Create') }}</button>
                     </div>
                 </form>
             </div>

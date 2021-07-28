@@ -10,7 +10,7 @@
 @section('content')
     <div class="d-flex justify-content-center">
         <div class="col-md-10">
-            <a href="{{ route('employees.create') }}" class="btn btn-primary mb-4">{{ __('Add Employee') }}</a>
+            <a href="{{ route('employees.create') }}" class="btn bg-orange mb-4">{{ __('Add Employee') }}</a>
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ $tableHeader ?? 'Employees Table' }}</h3>
