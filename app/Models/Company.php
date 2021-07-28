@@ -30,11 +30,11 @@ class Company extends Model implements HasMedia
     }
 
     // image conversion
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->width(180)
-            ->height(180)
-            ->performOnCollections('company-logo');
-    }
+    // public function registerMediaConversions(Media $media = null): void
+    // {
+    //     $this->addMediaConversion('thumb')
+    //         ->width(180)
+    //         ->height(180)
+    //         ->performOnCollections('company-logo');
+    // }
 }
