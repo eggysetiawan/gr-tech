@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Company;
-use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CompanyRequest extends FormRequest
+class UpdateCompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,11 +14,6 @@ class CompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        if (Company::where('slug', Str::slug(request('name')))->exists()) {
-            session()->flash('error', 'Company already exists!');
-            return back();
-        }
-
         return true;
     }
 
@@ -32,9 +26,9 @@ class CompanyRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2', 'max:255'],
-            'email' => ['required', 'email', 'min:5', 'max:255', 'unique:companies,email'],
+            'email' => ['required', 'email', 'min:5', 'max:255', Rule::unique('companies')->ignore($this->company->id, 'id')],
             'website' => ['nullable', 'min:5', 'max:255'],
-            'img' => ['image', 'max:2000', 'nullable'],
+            'img' => ['image', 'max:5000', 'nullable'],
         ];
     }
 }

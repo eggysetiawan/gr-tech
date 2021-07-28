@@ -1,1 +1,1 @@
-<a href="https://{{ $company->website }}">{{ $company->website }}</a>
+<a href="//{{ $company->website }}">{{ $company->website }}</a>

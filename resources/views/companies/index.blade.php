@@ -43,4 +43,22 @@
 @endsection
 @push('script')
     {!! $dataTable->scripts() !!}
+    @if ($errors->any())
+        @foreach ($errors->all() as $messages)
+            @php
+                $message[] = $messages;
+            @endphp
+        @endforeach
+
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to update!',
+                    text: '{!! join('-<br>', $message) !!}',
+                });
+            });
+        </script>
+
+    @endif
 @endpush

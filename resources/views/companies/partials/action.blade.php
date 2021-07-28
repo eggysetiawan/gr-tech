@@ -17,7 +17,8 @@
     <form action="{{ route('companies.destroy', $company->slug) }}" method="post" class="d-inline">
         @csrf
         @method('delete')
-        <button class="dropdown-item" title="{{ __('Delete Company.') }}">
+        <button class="dropdown-item" title="{{ __('Delete Company.') }}" type="submit"
+            onclick="return confirm('Are you sure want to delete this company?')">
             <i class="fas fa-trash nav-icon"></i>
             {{ __('Delete') }}
         </button>
@@ -29,27 +30,46 @@
 
 </x-dropdown>
 
-<!-- Modal -->
+<!-- Modal Edit -->
 <div class="modal fade" id="{{ $company->slug }}" tabindex="-1" aria-labelledby="{{ $company->slug }}Label"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-        <form action="{{ route('companies.update', $company->slug) }}" method="post" class="d-inline">
+    <div class="modal-dialog ">
+        <form action="{{ route('companies.update', $company->slug) }}" method="post" class="d-inline"
+            enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="{{ $company->slug }}Label">Modal title</h5>
+                    <h5 class="modal-title" id="{{ $company->slug }}Label">Edit {{ $company->name }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 @csrf
                 @method('patch')
-                <div class="modal-body">
+                <div class="modal-body text-left">
                     @include('companies.partials._form-control')
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Update Company</button>
+                    <button type="submit" class="btn btn-primary">Update Company</button>
                 </div>
         </form>
     </div>
 </div>
+
+
+@push('script')
+    @if ($errors->any())
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Pin yang anda masukkan salah!',
+                    text: 'Silahkan coba lagi.',
+                });
+
+
+            });
+        </script>
+
+    @endif
+@endpush

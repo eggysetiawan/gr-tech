@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('login') }}" class="brand-link">
-        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="{{ asset('logo.png') }}" alt="GR Tech Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8:object-fit: fill;">
         <span class="brand-text font-weight-light">{{ config('app.name', 'Rahmat Setiawan') }}</span>
     </a>
 
@@ -33,16 +33,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('users.index') }}"
-                        class="nav-link{{ request()->is('users') ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>
-                            Management User
-                            {{-- <span class="right badge badge-danger">New</span> --}}
-                        </p>
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('companies.index') }}"
@@ -60,6 +50,16 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Employees
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}"
+                        class="nav-link{{ request()->is('users') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            Management User
                         </p>
                     </a>
                 </li>

@@ -6,6 +6,7 @@ use App\Models\Company;
 use Illuminate\Support\Str;
 use App\DataTables\CompanyDataTable;
 use App\Http\Requests\CompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 
 class CompanyController extends Controller
 {
@@ -41,8 +42,13 @@ class CompanyController extends Controller
     {
         $attr = $request->validated();
         $attr['slug'] =  Str::slug($request->name);
+        $companies = Company::create($attr);
 
-        Company::create($attr);
+        if ($request->has('img')) {
+            $companies->addMediaFromRequest('img')
+                ->toMediaCollection('company-logo');
+        }
+
         session()->flash('success', __('Company has been created.'));
         return redirect('companies');
     }
@@ -73,11 +79,11 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request\CompanyRequest  $request
+     * @param  \Illuminate\Http\Request\UpdateCompanyRequest  $request
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(CompanyRequest $request, Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company)
     {
         $company->update($request->validated());
 
