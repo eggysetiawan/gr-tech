@@ -52,7 +52,7 @@
 
 <div class="form-group">
     <label for="phone">Phone</label>
-    <input type="phone" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror"
+    <input type="number" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror"
         value="{{ old('phone') ?? $employee->phone }}" placeholder="ex: 601234567">
 
     @error('phone')
