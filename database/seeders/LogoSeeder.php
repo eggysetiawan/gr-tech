@@ -20,7 +20,7 @@ class LogoSeeder extends Seeder
             $company
                 ->addMedia(storage_path('companylogo/' . $company->slug . '.png'))
                 ->preservingOriginal()
-                ->usingFileName($company->slug . '-logo')
+                ->usingFileName($company->slug . '.png')
                 ->toMediaCollection('company-logo');
         }
     }

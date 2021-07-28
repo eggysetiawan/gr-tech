@@ -87,7 +87,7 @@ class CompanyDataTable extends DataTable
 
             // action
             Column::computed('action')
-                ->title('<i class="fas fa-cogs"></i>')
+                ->title(__('Action'))
                 ->exportable(false)
                 ->printable(false)
                 ->orderable(false)

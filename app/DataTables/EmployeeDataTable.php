@@ -88,7 +88,7 @@ class EmployeeDataTable extends DataTable
 
             // action
             Column::computed('action')
-                ->title('<i class="fas fa-cogs"></i>')
+                ->title(__('Action'))
                 ->exportable(false)
                 ->printable(false)
                 ->orderable(false)
@@ -98,7 +98,8 @@ class EmployeeDataTable extends DataTable
 
             Column::make('name')
                 ->searchable(false)
-                ->title(__('Name')),
+                ->orderable(false)
+                ->title(__('Full Name')),
 
 
 

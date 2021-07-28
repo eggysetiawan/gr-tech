@@ -17,10 +17,10 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (auth()->check()) {
-            if (auth()->user()->email == 'admin@grtech.com.my') {
-                return $next($request);
+            if (auth()->user()->email == 'user@grtech.com.my') {
+                abort(403, 'Unauthorized action.');
             }
         }
-        abort(403, 'Unauthorized action.');
+        return $next($request);
     }
 }
