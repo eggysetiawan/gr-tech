@@ -3,7 +3,7 @@
     <a href="{{ route('login') }}" class="brand-link">
         <img src="{{ asset('logo.png') }}" alt="GR Tech Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8:object-fit: fill;">
-        <span class="brand-text font-weight-light">{{ config('app.name', 'Rahmat Setiawan') }}</span>
+        <span class="brand-text font-weight-light">&nbsp;</span>
     </a>
 
     <!-- Sidebar -->
@@ -14,7 +14,7 @@
                 <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                <a href="#" class="d-block">{{ auth()->user()->email }}</a>
             </div>
         </div>
 
@@ -50,16 +50,6 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Employees
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('users.index') }}"
-                        class="nav-link{{ request()->is('users') ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>
-                            Management User
                         </p>
                     </a>
                 </li>

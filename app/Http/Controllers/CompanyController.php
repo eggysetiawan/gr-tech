@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\DataTables\CompanyDataTable;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Services\CompanyService;
 
 class CompanyController extends Controller
 {
@@ -40,14 +41,7 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
-        $attr = $request->validated();
-        $attr['slug'] =  Str::slug($request->name);
-        $companies = Company::create($attr);
-
-        if ($request->has('img')) {
-            $companies->addMediaFromRequest('img')
-                ->toMediaCollection('company-logo');
-        }
+        (new CompanyService())->createCompany($request);
 
         session()->flash('success', __('Company has been created.'));
         return redirect('companies');
@@ -62,7 +56,10 @@ class CompanyController extends Controller
     public function show(Company $company)
     {
         $company->load('employees');
-        return view('companies.show', compact('company'));
+        return view('companies.show', [
+            'company' => $company,
+            'employeeCount' => Company::find($company->id)->count(),
+        ]);
     }
 
     /**
@@ -86,17 +83,7 @@ class CompanyController extends Controller
     public function update(UpdateCompanyRequest $request, Company $company)
     {
         $company->update($request->validated());
-
-        if ($request->has('img')) {
-            if (!$company->getFirstMediaUrl('company-logo')) {
-                $company->addMediaFromRequest('img')
-                    ->toMediaCollection('company-logo');
-            } else {
-                $company->media()->delete();
-                $company->addMediaFromRequest('img')
-                    ->toMediaCollection('company-logo');
-            }
-        }
+        (new CompanyService())->updateImg($company, $request);
 
         session()->flash('success', __('Company has been updated'));
         return redirect('companies');

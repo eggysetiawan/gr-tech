@@ -30,15 +30,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::resource('users', UserController::class)->parameters([
-        'users' => 'user:username',
-    ]);
+    Route::middleware('admin')->group(function () {
+        Route::resource('companies', CompanyController::class)->parameters([
+            'companies' => 'company:slug',
+        ]);
 
-    Route::resource('companies', CompanyController::class)->parameters([
-        'companies' => 'company:slug',
-    ]);
-
-    Route::resource('employees', EmployeeController::class)->parameters([
-        'employees' => 'employee:slug',
-    ]);
+        Route::resource('employees', EmployeeController::class);
+    });
 });

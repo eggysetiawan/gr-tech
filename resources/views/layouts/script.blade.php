@@ -20,6 +20,8 @@
 <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 {{-- Sweetalert2 --}}
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+{{-- select2 --}}
+<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
@@ -86,5 +88,11 @@
 <script>
     $(function() {
         bsCustomFileInput.init();
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
     });
 </script>

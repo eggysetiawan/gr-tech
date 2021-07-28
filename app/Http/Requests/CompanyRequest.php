@@ -37,4 +37,11 @@ class CompanyRequest extends FormRequest
             'img' => ['image', 'max:2000', 'nullable'],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'img' => 'Logo'
+        ];
+    }
 }

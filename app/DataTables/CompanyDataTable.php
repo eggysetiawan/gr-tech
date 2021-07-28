@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\Models\Company;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
@@ -25,19 +24,21 @@ class CompanyDataTable extends DataTable
                     'company' => $company
                 ]);
             })
-
             ->editColumn('website', function (Company $company) {
                 return view('companies.partials.website', [
                     'company' => $company,
                 ]);
             })
-            ->rawColumns(['action']);
+            ->editColumn('logo', function (Company $company) {
+                return view('companies.partials.logo', compact('company'));
+            })
+            ->rawColumns(['action', 'logo']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \Company $model
+     * @param App\Models\Company $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Company $model)
@@ -102,6 +103,10 @@ class CompanyDataTable extends DataTable
 
             Column::make('website')
                 ->title(__('Website')),
+
+            Column::computed('logo')
+                ->title('Logo')
+                ->addClass('text-center'),
 
         ];
     }
