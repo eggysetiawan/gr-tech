@@ -15,11 +15,6 @@ class CompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        if (Company::where('slug', Str::slug(request('name')))->exists()) {
-            session()->flash('error', 'Company already exists!');
-            return back();
-        }
-
         return true;
     }
 
@@ -31,7 +26,7 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'name' => ['required', 'string', 'min:2', 'max:255', 'unique:companies,name'],
             'email' => ['required', 'email', 'min:5', 'max:255', 'unique:companies,email'],
             'website' => ['nullable', 'min:5', 'max:255'],
             'img' => ['image', 'max:2000', 'nullable'],

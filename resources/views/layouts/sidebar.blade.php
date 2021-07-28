@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('login') }}" class="brand-link">
-        <img src="{{ asset('logo.png') }}" alt="GR Tech Logo" class="brand-image img-fluid text-center"
+        <img src="{{ asset('logo.png') }}" alt="GR Tech Logo" class="brand-image img-fluid"
             style="opacity: .8:object-fit: fill;">
         <span class="brand-text font-weight-light">&nbsp;</span>
     </a>
