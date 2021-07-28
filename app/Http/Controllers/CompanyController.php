@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\DataTables\CompanyDataTable;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Models\Employee;
 use App\Services\CompanyService;
 
 class CompanyController extends Controller
@@ -53,12 +54,12 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show(Company $company, Employee $employee)
     {
         $company->load('employees');
         return view('companies.show', [
             'company' => $company,
-            'employeeCount' => Company::find($company->id)->count(),
+            'employeeCount' => $company->employees()->count(),
             'menu' => 'companies',
         ]);
     }

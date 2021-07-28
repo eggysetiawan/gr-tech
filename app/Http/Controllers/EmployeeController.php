@@ -64,7 +64,7 @@ class EmployeeController extends Controller
         $company->with('employees');
         return view('companies.show', [
             'company' => $company,
-            'employeeCount' => Company::find($company->id)->count(),
+            'employeeCount' => $company->employees()->count(),
             'menu' => 'employees',
         ]);
     }
