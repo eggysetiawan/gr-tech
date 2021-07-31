@@ -1,6 +1,6 @@
 @extends('layouts.app',[
-    'page' => 'Example Page',
-    'title' => 'Example'
+'page' => 'Example Page',
+'title' => 'Example'
 ])
 
 @section('breadcrumb')
@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div class="row">
+    <div class="row">
 
-</div>
+    </div>
 @endsection

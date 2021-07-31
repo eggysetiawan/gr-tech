@@ -8,7 +8,7 @@
     @include('layouts.head')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed sidebar-mini accent-orange">
+<body class="hold-transition sidebar-mini layout-fixed sidebar-mini accent-orange sidebar-collapse">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->

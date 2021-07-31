@@ -100,6 +100,18 @@
 </script>
 
 <script>
+    $(document).ready(function() {
+        $('#email').select2();
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#company').select2();
+    });
+</script>
+
+<script>
     $(function() {
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();

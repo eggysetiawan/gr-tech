@@ -7,8 +7,8 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\DataTables\EmployeeDataTable;
 use App\Events\EmployeeCreated;
-use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use Illuminate\Http\Client\Request as ClientRequest;
 
 class EmployeeController extends Controller
 {
@@ -19,8 +19,26 @@ class EmployeeController extends Controller
      */
     public function index(EmployeeDataTable $dataTable)
     {
-        return $dataTable->render('employees.index');
+        $employees = Employee::all();
+        return $dataTable->render('employees.index', compact('employees'));
     }
+
+    public function filter(EmployeeDataTable $dataTable)
+    {
+        $filter = [
+            'from' => request('from') ?? null,
+            'to' => request('to') ?? null,
+            'first_name' => request('first_name') ?? null,
+            'last_name' => request('last_name') ?? null,
+            'email' => request('email') ?? null,
+            'company' => request('company') ?? null,
+        ];
+
+        $employees = Employee::all();
+        return $dataTable->with($filter)->render('employees.index', compact('employees'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

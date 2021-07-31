@@ -43,8 +43,24 @@ class EmployeeDataTable extends DataTable
      */
     public function query(Employee $model)
     {
+        $filter = [
+            $this->from,
+            $this->to,
+            $this->first_name,
+            $this->last_name,
+            $this->email,
+            $this->company
+        ];
         return $model->newQuery()
             ->with(['company'])
+            ->when(in_array(true, $filter), function ($query) {
+                return $query->where('created_at', $this->from)
+                    ->orWhere('created_at', $this->to)
+                    ->orWhere('first_name', $this->first_name)
+                    ->orWhere('last_name', $this->last_name)
+                    ->orWhere('email', $this->email)
+                    ->orWhere('company_id', $this->company);
+            })
             ->latest();
     }
 
